@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    MovingImage\Bundle\IqsBundle\:
+        resource: '../../*'
+        exclude: '../../Tests'
+
+    MovingImage\Bundle\IqsBundle\Service\TokenGeneratorClient: '@eight_points_guzzle.client.tokenGeneratorClient'
