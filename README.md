@@ -37,51 +37,31 @@ The content of auth.json is periodically updated, that's why it must not exist i
 #.gitignore
 auth.json
 ```
-Create a php file with this content. This script will run by composer before the install command.
-It will create the auth.json, whenever your project is newly set up (by running "composer install").
-```php
-<?php 
+
+Write a script which creates the file auth.json if it doesn't exist yet.
+```
+#!/usr/bin/env php
+<?php
 
 declare(strict_types=1);
 
-namespace Application\Composer;
+$destinationFilePath = '/var/www/auth.json';
 
-use Composer\Script\Event;
-
-class ScriptHandler
-{
-    public static function buildAuthJson(Event $event): void
-    {
-        $projectDir = $event->getComposer()->getConfig()->get('vendor-dir').'/..';
-        $destinationFilePath = $projectDir.'/auth.json';
-        $content = [
-            'bitbucket-oauth' => [
-                'bitbucket.org' => [
-                    'consumer-key' => 'xXw5q9quAUtN34fYzH',
-                    'consumer-secret' => 'c6nrRc9gwq488dn8hRjTRSrHKe5QYhbG',
-                ]
+if (!file_exists($destinationFilePath)) {
+    $content = [
+        'bitbucket-oauth' => [
+            'bitbucket.org' => [
+                'consumer-key' => 'xXw5q9quAUtN34fYzH',
+                'consumer-secret' => 'c6nrRc9gwq488dn8hRjTRSrHKe5QYhbG',
             ]
-        ];
+        ]
+    ];
 
-        if (!file_exists($destinationFilePath)) {
-            file_put_contents($destinationFilePath, json_encode($content));
-        }
-    }
+    file_put_contents($destinationFilePath, json_encode($content));
 }
 ```
-
-Now make the script run by composer whenever you install the project.
-Add it to the composer.json file.
-
-```json
-{
-  "scripts": {
-      "pre-install-cmd": [
-          "Application\\Composer\\ScriptHandler::buildAuthJson"
-      ]
-  }
-}
-```
+This script should run before you run "composer install". 
+It's not possible to run it by a composer script triggered by the event "pre-install-cmd", because even though the file is created successfully, composer is at run-time not aware of it. 
 
 ## Configure the symfony bundle
 
