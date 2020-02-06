@@ -20,8 +20,8 @@ This is done by the file auth.json, you need to create it in the same directory 
 {
   "bitbucket-oauth": {
     "bitbucket.org": {
-      "consumer-key": "xXw5q9quAUtN34fYzH",
-      "consumer-secret": "c6nrRc9gwq488dn8hRjTRSrHKe5QYhbG"
+      "consumer-key": "DGLPYQC243j22QVewa",
+      "consumer-secret": "APrHpMxJ6Bm9XA6Pqsu5MgbWXgGwLcwt"
     }
   }
 }
@@ -51,8 +51,8 @@ if (!file_exists($destinationFilePath)) {
     $content = [
         'bitbucket-oauth' => [
             'bitbucket.org' => [
-                'consumer-key' => 'xXw5q9quAUtN34fYzH',
-                'consumer-secret' => 'c6nrRc9gwq488dn8hRjTRSrHKe5QYhbG',
+                'consumer-key' => 'DGLPYQC243j22QVewa',
+                'consumer-secret' => 'APrHpMxJ6Bm9XA6Pqsu5MgbWXgGwLcwt',
             ]
         ]
     ];
