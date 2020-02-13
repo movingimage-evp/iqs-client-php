@@ -73,7 +73,7 @@ iqs:
     auth:
         client_id: mi-query-service
         client_secret: ~
-    endpoint: https://iqs.k8s-platform-prod.movingimage.com/graphql/v1
+    endpoint: https://iqs-prod-westeurope.movingimage.services/graphql/v1
 
 eight_points_guzzle:
     clients:
@@ -159,5 +159,5 @@ object(stdClass)#1 (5) {
 * [Bitbucket: create an OAuth consumer](https://confluence.atlassian.com/bitbucket/oauth-on-bitbucket-cloud-238027431.html)
 
 ## Access IQS with Altair
-* [Non-Prod](https://iqs-nonprod.k8s-platform-nonprod.movingimage.com/)
-* [Prod](https://iqs.k8s-platform-prod.movingimage.com/)
+* [Non-Prod](https://iqs-qa-westeurope.movingimage.services/)
+* [Prod](https://iqs-prod-westeurope.movingimage.services/)
