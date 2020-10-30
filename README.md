@@ -153,11 +153,51 @@ object(stdClass)#1 (5) {
 
 ```
 
+### Here is an example how to build a query with the VideoQueryBuilder
+Following query must be built.
+```
+{
+  video(
+    id: "-PGfCEnaJMapJwF3vg4KnT"
+    vmId: 765
+    env: "prod"
+    lang: "(DEFAULT)"
+  ) {
+    videoId
+    title
+    userId: customMetadata(field: "04-User-ID") {
+      ... on MetadataString {
+        value
+      }
+    }
+    related (left: "customMetadata.A-01-Match-ID", predicate: EQUALS, page: {}) {
+      videos {
+        videoId
+        length
+      }
+    }
+  }
+}
+```
+Use the VideoQueryBuilder to build a query like the given example.
+```php
+$videoQueryBuilder = new \MovingImage\Bundle\IqsBundle\QueryBuilder\Video\VideoQueryBuilder('-PGfCEnaJMapJwF3vg4KnT', 765);
+$relationExpression = new \MovingImage\Bundle\IqsBundle\QueryBuilder\Relation\RelationExpression('A-01-Match-ID', true);
+$relatedVideosQueryBuilder = new \MovingImage\Bundle\IqsBundle\QueryBuilder\Video\RelatedVideosQueryBuilder();
+$relatedVideosQueryBuilder->selectVideoId()->selectDuration('length');
+
+$videoQueryBuilder
+    ->selectVideoId()
+    ->selectTitle()
+    ->selectCustomMetadataField('04-User-ID', 'userId')
+    ->selectRelatedVideos($relatedVideosQueryBuilder, [$relationExpression]);
+```
+
 ## Documentation
 * [Wiki: IQS - Query Service Developer's Guide](https://wiki.mi24.tv/pages/viewpage.action?spaceKey=it&title=IQS+-+Query+Service+Developer%27s+Guide)
 * [Composer: BitBucket driver configuration](https://getcomposer.org/doc/05-repositories.md#bitbucket-driver-configuration)
 * [Bitbucket: create an OAuth consumer](https://confluence.atlassian.com/bitbucket/oauth-on-bitbucket-cloud-238027431.html)
 
 ## Access IQS with Altair
-* [Non-Prod](https://iqs-qa-westeurope.movingimage.services/)
-* [Prod](https://iqs-prod-westeurope.movingimage.services/)
+* [Non-Prod](https://iqs-qa-westeurope.movingimage.services/altair)
+* [Prod](https://iqs-prod-westeurope.movingimage.services/altair)
