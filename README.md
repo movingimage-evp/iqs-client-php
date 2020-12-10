@@ -16,12 +16,13 @@ Add the bitbucket repository to the composer.json file.
 
 Before you can run composer to require the dependency, composer needs to get access to Bitbucket.
 This is done by the file auth.json, you need to create it in the same directory as the composer.json, with this content.
+Get the credentials of this OAuth consumer from https://pdb.mi24.tv/app/#/secret/826/general
 ```json
 {
   "bitbucket-oauth": {
     "bitbucket.org": {
-      "consumer-key": "DGLPYQC243j22QVewa",
-      "consumer-secret": "APrHpMxJ6Bm9XA6Pqsu5MgbWXgGwLcwt"
+      "consumer-key": "12345",
+      "consumer-secret": "abcdef"
     }
   }
 }
@@ -51,8 +52,8 @@ if (!file_exists($destinationFilePath)) {
     $content = [
         'bitbucket-oauth' => [
             'bitbucket.org' => [
-                'consumer-key' => 'DGLPYQC243j22QVewa',
-                'consumer-secret' => 'APrHpMxJ6Bm9XA6Pqsu5MgbWXgGwLcwt',
+                'consumer-key' => '12345',
+                'consumer-secret' => 'abcdef',
             ]
         ]
     ];
@@ -64,36 +65,12 @@ This script should run before you run "composer install".
 It's not possible to run it by a composer script triggered by the event "pre-install-cmd", because even though the file is created successfully, composer is at run-time not aware of it. 
 
 ## Configure the symfony bundle
-
-Add this to the symfony config file and replace ~ by your needs.
-```yaml
-iqs:
-    username: ~
-    password: ~
-    auth:
-        client_id: mi-query-service
-        client_secret: ~
-    endpoint: https://iqs-prod-westeurope.movingimage.services/graphql/v1
-
-eight_points_guzzle:
-    clients:
-        tokenGeneratorClient:
-            class: MovingImage\Bundle\IqsBundle\Service\TokenGeneratorClient
-            base_url: https://login.movingimage.com
-            lazy: true # Default `false`
-            # guzzle client options (full description here: https://guzzle.readthedocs.org/en/latest/request-options.html)
-            options:
-                headers:
-                    Accept: "application/json"
-                timeout: 30
-                connect_timeout: 10
-
-```
+* Instances creation should be handled inside projects which use the library.  
+* For `MovingImage\Bundle\IqsBundle\Service\TokenGeneratorClient` : `base_url` should be set as full auth url (for requesting token). 
 * "username" and "password" must be the credentials of a real VMPro user, who also belongs to the VideoManager whose videos are queried. For this user there must be attributes and role mappings configured on Keycloak. How to do this, have a look in our [Wiki](https://wiki.mi24.tv/pages/viewpage.action?spaceKey=it&title=IQS+-+Query+Service+Developer%27s+Guide). 
 * From Keycloak you can get the "client_secret", which must belong to the configured service in "client_id". 
 
 ## How to use the client
-Since this is a Symfony bundle, the IqsClient is automatically available as a service. Just inject it as a dependency to a constructor.
 ```php
 class Something 
 {

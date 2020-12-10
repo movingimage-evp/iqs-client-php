@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace MovingImage\Bundle\IqsBundle\Service;
 
+use Psr\Http\Message\ResponseInterface;
+
 class TokenGenerator
 {
     /** @var string */
@@ -35,9 +37,30 @@ class TokenGenerator
         $this->clientId = $clientId;
     }
 
+    /**
+     * @return string
+     */
     public function getToken(): string
     {
-        $options = [
+        return $this->sendTokenRequest()['access_token'];
+    }
+
+    /**
+     * @return array
+     */
+    private function sendTokenRequest(): array
+    {
+        return $this->parseResponse(
+            $this->client->post('', $this->getFormParams())
+        );
+    }
+
+    /**
+     * @return array
+     */
+    private function getFormParams(): array
+    {
+        return [
             'form_params' => [
                 'grant_type' => 'password',
                 'client_secret' => $this->clientSecret,
@@ -46,11 +69,14 @@ class TokenGenerator
                 'password' => $this->password,
             ]
         ];
+    }
 
-        $response = $this->client->post('auth/realms/platform/protocol/openid-connect/token', $options);
-
-        $content = json_decode($response->getBody()->getContents(), true);
-
-        return $content['access_token'];
+    /**
+     * @param ResponseInterface $response
+     * @return array
+     */
+    private function parseResponse(ResponseInterface $response): array
+    {
+        return \json_decode($response->getBody()->getContents(), true);
     }
 }

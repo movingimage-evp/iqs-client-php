@@ -20,18 +20,27 @@ class GraphQLClientFactory
         $this->endpoint = $endpoint;
     }
 
+    /**
+     * @return Client
+     */
     public function createGraphQLClient(): Client
     {
-        $accessToken = $this->tokenGenerator->getToken();
-
         return new Client(
             $this->endpoint,
             [],
             [
-                'headers' => [
-                    'Authorization' => 'Bearer '.$accessToken,
-                ]
+                'headers' => $this->getClientHeaders()
             ]
         );
+    }
+
+    /**
+     * @return string[]
+     */
+    private function getClientHeaders(): array
+    {
+        return [
+            'Authorization' => 'Bearer ' . $this->tokenGenerator->getToken(),
+        ];
     }
 }

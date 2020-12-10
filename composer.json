@@ -9,7 +9,7 @@
         }
     },
     "require": {
-        "php": "^7.2",
+        "php": "^7.4",
         "eightpoints/guzzle-bundle": "^7.6",
         "ext-dom": "*",
         "gmostafa/php-graphql-client": "^1.4",
