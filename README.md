@@ -1,3 +1,5 @@
+[![Build Status](https://github.com/movingimage-evp/iqs-client-php/actions/workflows/verify-pull-request.yml/badge.svg)](https://github.com/movingimage-evp/iqs-client-php/actions/workflows/verify-pull-request.yml)
+
 # IQS (Index Query Service) Client Bundle
 
 ## Installation
