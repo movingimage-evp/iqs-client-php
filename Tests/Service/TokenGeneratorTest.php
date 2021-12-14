@@ -6,8 +6,8 @@ namespace MovingImage\IqsBundle\Tests\Service;
 
 use MovingImage\Bundle\IqsBundle\Service\TokenGenerator;
 use MovingImage\Bundle\IqsBundle\Service\TokenGeneratorClient;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 

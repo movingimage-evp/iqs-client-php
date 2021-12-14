@@ -68,7 +68,7 @@ class CustomMetadataQueryBuilderTest extends TestCase
             $this->expectException(\InvalidArgumentException::class);
         }
 
-        $queryBuilder = new CustomMetadataQueryBuilder('key', 'fieldName', $type);
+        new CustomMetadataQueryBuilder('key', 'fieldName', $type);
 
         self::assertFalse($expectException);
     }

@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace MovingImage\IqsBundle\Tests\Service;
 
+use Couchbase\QueryResult;
 use MovingImage\Bundle\IqsBundle\Tests\ObjectFactory;
 use GraphQL\Client;
 use GraphQL\Results;
 use MovingImage\Bundle\IqsBundle\QueryBuilder\Video\VideoQueryBuilder;
 use MovingImage\Bundle\IqsBundle\Service\GraphQLClientFactory;
 use MovingImage\Bundle\IqsBundle\Service\IqsClient;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use MovingImage\Bundle\IqsBundle\Tests\Helper;
 
 class IqsClientTest extends TestCase

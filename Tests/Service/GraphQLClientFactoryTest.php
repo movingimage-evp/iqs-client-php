@@ -6,8 +6,8 @@ namespace MovingImage\IqsBundle\Tests\Service;
 
 use MovingImage\Bundle\IqsBundle\Service\GraphQLClientFactory;
 use MovingImage\Bundle\IqsBundle\Service\TokenGenerator;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject as MockObject;
 use MovingImage\Bundle\IqsBundle\Tests\Helper;
 
 class GraphQLClientFactoryTest extends TestCase
@@ -46,7 +46,7 @@ class GraphQLClientFactoryTest extends TestCase
         self::assertEquals($this->expectedEndpoint, $endpoint);
 
         $httpOptions = $this->getProperty($client, 'httpHeaders');
-        
+
         self::assertArrayHasKey('Authorization', $httpOptions);
         self::assertEquals('Bearer '.$token, $httpOptions['Authorization']);
     }
