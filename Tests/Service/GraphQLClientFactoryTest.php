@@ -45,9 +45,9 @@ class GraphQLClientFactoryTest extends TestCase
         $endpoint = $this->getProperty($client, 'endpointUrl');
         self::assertEquals($this->expectedEndpoint, $endpoint);
 
-        $httpOptions = $this->getProperty($client, 'httpOptions');
-        self::assertArrayHasKey('headers', $httpOptions);
-        self::assertArrayHasKey('Authorization', $httpOptions['headers']);
-        self::assertEquals('Bearer '.$token, $httpOptions['headers']['Authorization']);
+        $httpOptions = $this->getProperty($client, 'httpHeaders');
+        
+        self::assertArrayHasKey('Authorization', $httpOptions);
+        self::assertEquals('Bearer '.$token, $httpOptions['Authorization']);
     }
 }
