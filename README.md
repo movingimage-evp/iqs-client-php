@@ -2,70 +2,6 @@
 
 # IQS (Index Query Service) Client Bundle
 
-## Installation
-
-Add the bitbucket repository to the composer.json file.
-```json
-{
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://bitbucket.org/movingimage24/iqs-client-php"
-        }
-    ]
-}
-```
-
-Before you can run composer to require the dependency, composer needs to get access to Bitbucket.
-This is done by the file auth.json, you need to create it in the same directory as the composer.json, with this content.
-Get the credentials of this OAuth consumer from https://pdb.mi24.tv/app/#/secret/826/general
-```json
-{
-  "bitbucket-oauth": {
-    "bitbucket.org": {
-      "consumer-key": "12345",
-      "consumer-secret": "abcdef"
-    }
-  }
-}
-```
-Install now the dependency.
-```
-composer require movingimage/iqs-client-php:dev-master
-```
-### auto-generate auth.json when installing the project
-You should put auth.json to the .gitignore file.
-The content of auth.json is periodically updated, that's why it must not exist in the repository.
-```gitignore
-#.gitignore
-auth.json
-```
-
-Write a script which creates the file auth.json if it doesn't exist yet.
-```
-#!/usr/bin/env php
-<?php
-
-declare(strict_types=1);
-
-$destinationFilePath = '/var/www/auth.json';
-
-if (!file_exists($destinationFilePath)) {
-    $content = [
-        'bitbucket-oauth' => [
-            'bitbucket.org' => [
-                'consumer-key' => '12345',
-                'consumer-secret' => 'abcdef',
-            ]
-        ]
-    ];
-
-    file_put_contents($destinationFilePath, json_encode($content));
-}
-```
-This script should run before you run "composer install". 
-It's not possible to run it by a composer script triggered by the event "pre-install-cmd", because even though the file is created successfully, composer is at run-time not aware of it. 
-
 ## Configure the symfony bundle
 * Instances creation should be handled inside projects which use the library.  
 * For `MovingImage\Bundle\IqsBundle\Service\TokenGeneratorClient` : `base_url` should be set as full auth url (for requesting token). 
@@ -171,12 +107,3 @@ $videoQueryBuilder
     ->selectCustomMetadataField('04-User-ID', 'userId')
     ->selectRelatedVideos($relatedVideosQueryBuilder, [$relationExpression]);
 ```
-
-## Documentation
-* [Wiki: IQS - Query Service Developer's Guide](https://wiki.mi24.tv/pages/viewpage.action?spaceKey=it&title=IQS+-+Query+Service+Developer%27s+Guide)
-* [Composer: BitBucket driver configuration](https://getcomposer.org/doc/05-repositories.md#bitbucket-driver-configuration)
-* [Bitbucket: create an OAuth consumer](https://confluence.atlassian.com/bitbucket/oauth-on-bitbucket-cloud-238027431.html)
-
-## Access IQS with Altair
-* [Non-Prod](https://iqs-qa-westeurope.movingimage.services/altair)
-* [Prod](https://iqs-prod-westeurope.movingimage.services/altair)
