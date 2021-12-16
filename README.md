@@ -5,7 +5,7 @@
 ## Configure the symfony bundle
 * Instances creation should be handled inside projects which use the library.  
 * For `MovingImage\Bundle\IqsBundle\Service\TokenGeneratorClient` : `base_url` should be set as full auth url (for requesting token). 
-* "username" and "password" must be the credentials of a real VMPro user, who also belongs to the VideoManager whose videos are queried. For this user there must be attributes and role mappings configured on Keycloak. How to do this, have a look in our [Wiki](https://wiki.mi24.tv/pages/viewpage.action?spaceKey=it&title=IQS+-+Query+Service+Developer%27s+Guide). 
+* "username" and "password" must be the credentials of a real VMPro user, who also belongs to the VideoManager whose videos are queried.
 * From Keycloak you can get the "client_secret", which must belong to the configured service in "client_id". 
 
 ## How to use the client
