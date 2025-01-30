@@ -18,6 +18,9 @@ class RelationByKeywordsQueryBuilderTest extends TestCase
 {
     use Helper;
 
+    /**
+     * @covers \MovingImage\Bundle\IqsBundle\QueryBuilder\Relation\RelationByKeywordsQueryBuilder::__construct
+     */
     public function testConstructor(): void
     {
         $queryBuilder = new RelationByKeywordsQueryBuilder(
@@ -27,6 +30,9 @@ class RelationByKeywordsQueryBuilderTest extends TestCase
         self::assertNotInstanceOf(MainQueryBuilderInterface::class, $queryBuilder);
     }
 
+    /**
+     * @covers \MovingImage\Bundle\IqsBundle\QueryBuilder\Relation\RelationByKeywordsQueryBuilder::createRawObject
+     */
     public function testConfiguration(): void
     {
         $relatedVideosQueryBuilder = new RelatedVideosQueryBuilder();

@@ -14,7 +14,9 @@ use MovingImage\Bundle\IqsBundle\Tests\Helper;
 class CustomMetadataQueryBuilderTest extends TestCase
 {
     use Helper;
-
+    /**
+     * @covers \MovingImage\Bundle\IqsBundle\QueryBuilder\CustomMetadataQueryBuilder::createRawObject
+     */
     public function testConstructor(): void
     {
         $queryBuilder = new CustomMetadataQueryBuilder('key', 'fieldName');
@@ -22,6 +24,9 @@ class CustomMetadataQueryBuilderTest extends TestCase
         self::assertNotInstanceOf(MainQueryBuilderInterface::class, $queryBuilder);
     }
 
+    /**
+     * @covers \MovingImage\Bundle\IqsBundle\QueryBuilder\CustomMetadataQueryBuilder::createRawObject
+     */
     public function testConfiguration(): void
     {
         $newFieldName = 'fieldName';
@@ -45,7 +50,7 @@ class CustomMetadataQueryBuilderTest extends TestCase
         self::assertEquals('... on '.$expectedType, $subFieldName);
 
         $subSelectionSet = $this->getProperty($subQueryBuilder, 'selectionSet', AbstractQueryBuilder::class);
-        self::assertContains('value', $subSelectionSet);
+        self::assertContainsEquals('value', $subSelectionSet);
     }
 
     private function getQueryBuilderFromArray(array $selectionSet): QueryBuilder
@@ -61,6 +66,7 @@ class CustomMetadataQueryBuilderTest extends TestCase
 
     /**
      * @dataProvider typesDataProvider
+     * @covers \MovingImage\Bundle\IqsBundle\QueryBuilder\CustomMetadataQueryBuilder::createRawObject
      */
     public function testTypes(string $type, bool $expectException): void
     {
@@ -73,7 +79,7 @@ class CustomMetadataQueryBuilderTest extends TestCase
         self::assertFalse($expectException);
     }
 
-    public function typesDataProvider(): array
+    public static function typesDataProvider(): array
     {
         return [
             [ CustomMetadataQueryBuilder::METADATA_NUMBER, false ],

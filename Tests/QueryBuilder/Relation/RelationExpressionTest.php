@@ -11,6 +11,7 @@ class RelationExpressionTest extends TestCase
 {
     /**
      * @dataProvider validatePredicateProvider
+     * @covers \MovingImage\Bundle\IqsBundle\QueryBuilder\Relation\RelationExpression::validatePredicate
      */
     public function testValidatePredicate(string $predicate, bool $exceptionThrown): void
     {
@@ -27,7 +28,7 @@ class RelationExpressionTest extends TestCase
         self::assertFalse($exceptionThrown);
     }
 
-    public function validatePredicateProvider(): array
+    public static function validatePredicateProvider(): array
     {
         return [
             [ RelationExpression::MATCH_OPERATOR_IN, false ],
@@ -38,6 +39,7 @@ class RelationExpressionTest extends TestCase
 
     /**
      * @dataProvider toStringProvider
+     * @covers \MovingImage\Bundle\IqsBundle\QueryBuilder\Relation\RelationExpression::toString
      */
     public function testToString(
         string $left,
@@ -58,7 +60,7 @@ class RelationExpressionTest extends TestCase
         self::assertEquals($expectedOutput, (string) $relationExpression);
     }
 
-    public function toStringProvider(): array
+    public static function toStringProvider(): array
     {
         return [
             [

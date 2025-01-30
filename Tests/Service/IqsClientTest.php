@@ -41,11 +41,17 @@ class IqsClientTest extends TestCase
         $this->iqsClient = new IqsClient($this->clientFactory);
     }
 
+    /**
+     * @covers \MovingImage\Bundle\IqsBundle\Service\IqsClient::__construct
+     */
     public function testConstructor(): void
     {
         self::assertInstanceOf(IqsClient::class, $this->iqsClient);
     }
 
+    /**
+     * @covers \MovingImage\Bundle\IqsBundle\Service\IqsClient::runQuery
+     */
     public function testRunQuery(): void
     {
         $videoId = '1234';

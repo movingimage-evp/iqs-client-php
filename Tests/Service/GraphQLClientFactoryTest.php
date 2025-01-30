@@ -30,11 +30,17 @@ class GraphQLClientFactoryTest extends TestCase
         $this->graphQLClientFactory = new GraphQLClientFactory($this->tokenGenerator, $this->expectedEndpoint);
     }
 
+    /**
+     * @covers \MovingImage\Bundle\IqsBundle\Service\GraphQLClientFactory::__construct
+     */
     public function testConstructor(): void
     {
         self::assertInstanceOf(GraphQLClientFactory::class, $this->graphQLClientFactory);
     }
 
+    /**
+     * @covers \MovingImage\Bundle\IqsBundle\Service\GraphQLClientFactory::createGraphQLClient
+     */
     public function testCreateClient(): void
     {
         $token = 'access_token';

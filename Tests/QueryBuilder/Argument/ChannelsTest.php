@@ -11,6 +11,7 @@ class ChannelsTest extends TestCase
 {
     /**
      * @dataProvider channelsProvider
+     * @covers \MovingImage\Bundle\IqsBundle\QueryBuilder\Argument\Channels::createRawObject
      */
     public function testCreateRawObject(array $ids, string $expected): void
     {
@@ -18,7 +19,7 @@ class ChannelsTest extends TestCase
         $this->assertEquals($expected, (string) $channels->createRawObject());
     }
 
-    public function channelsProvider()
+    public static function channelsProvider(): array
     {
         return [
             [[], '{ ids: [] }'],

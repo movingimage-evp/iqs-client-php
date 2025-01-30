@@ -25,6 +25,9 @@ class AbstractVideoQueryBuilderTest extends TestCase
         $this->abstractVideoQueryBuilder = new VideoQueryBuilder('12', 4);
     }
 
+    /**
+     * @covers \MovingImage\Bundle\IqsBundle\QueryBuilder\Video\VideoQueryBuilder::__construct
+     */
     public function testConstructor(): void
     {
         self::assertInstanceOf(AbstractQueryBuilder::class, $this->abstractVideoQueryBuilder);
@@ -32,6 +35,7 @@ class AbstractVideoQueryBuilderTest extends TestCase
 
     /**
      * @dataProvider selectFieldProvider
+     * @covers \MovingImage\Bundle\IqsBundle\QueryBuilder\Video\AbstractVideoQueryBuilder::selectField
      */
     public function testSelectField(string $expectedFieldName, string $methodName, ?string $newFieldName): void
     {
@@ -42,7 +46,7 @@ class AbstractVideoQueryBuilderTest extends TestCase
         self::assertEquals($expectedFieldName, $selectionSet[0]);
     }
 
-    public function selectFieldProvider(): array
+    public static function selectFieldProvider(): array
     {
         return [
             ['title', 'selectTitle', '' ],
@@ -56,6 +60,9 @@ class AbstractVideoQueryBuilderTest extends TestCase
         ];
     }
 
+    /**
+     * @covers \MovingImage\Bundle\IqsBundle\QueryBuilder\Video\AbstractVideoQueryBuilder::selectCustomMetadataField
+     */
     public function testSelectCustomMetaDataField(): void
     {
         $newFieldName = 'userId';
@@ -76,7 +83,7 @@ class AbstractVideoQueryBuilderTest extends TestCase
         self::assertEquals('... on MetadataString', $customMetaQueryFieldName);
 
         $customMetaQuerySelectionSet = $this->getProperty($customMetaQuery, 'selectionSet');
-        self::assertContains('value', $customMetaQuerySelectionSet);
+        self::assertContainsEquals('value', $customMetaQuerySelectionSet);
     }
 
     private function getQueryFromArray(array $selectionSet): Query
@@ -101,6 +108,9 @@ class AbstractVideoQueryBuilderTest extends TestCase
         self::fail('no QueryBuilder found in selectionSet');
     }
 
+    /**
+     * @covers \MovingImage\Bundle\IqsBundle\QueryBuilder\Video\AbstractVideoQueryBuilder::selectRelatedVideos
+     */
     public function testSelectRelatedVideo(): void
     {
         $expectedRelatedVideosQueryBuilder = new RelatedVideosQueryBuilder();
@@ -121,6 +131,9 @@ class AbstractVideoQueryBuilderTest extends TestCase
         self::assertEquals($expectedRelatedVideosQueryBuilder, $relatedVideosQueryBuilder);
     }
 
+    /**
+     * @covers \MovingImage\Bundle\IqsBundle\QueryBuilder\Video\AbstractVideoQueryBuilder::selectRelatedVideos
+     */
     public function testWrongArgumentForRelationExpressionsThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
