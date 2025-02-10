@@ -11,6 +11,7 @@ class PageTest extends TestCase
 {
     /**
      * @dataProvider pageProvider
+     * @covers \MovingImage\Bundle\IqsBundle\QueryBuilder\Argument\Page::createRawObject
      */
     public function testCreateRawObject(int $size, string $cursor, string $expected): void
     {
@@ -18,7 +19,7 @@ class PageTest extends TestCase
         $this->assertEquals($expected, (string) $page->createRawObject());
     }
 
-    public function pageProvider()
+    public static function pageProvider(): array
     {
         return [
             [10, '', '{ size: 10, cursor: "" }'],

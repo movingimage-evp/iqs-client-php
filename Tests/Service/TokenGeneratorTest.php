@@ -44,11 +44,17 @@ class TokenGeneratorTest extends TestCase
         );
     }
 
+    /**
+     * @covers \MovingImage\Bundle\IqsBundle\Service\TokenGenerator::__construct
+     */
     public function testConstructor(): void
     {
         self::assertInstanceOf(TokenGenerator::class, $this->tokenGenerator);
     }
 
+    /**
+     * @covers \MovingImage\Bundle\IqsBundle\Service\TokenGenerator::getToken
+     */
     public function testGetToken(): void
     {
         $expectedAccessToken = 'p98aposdk';

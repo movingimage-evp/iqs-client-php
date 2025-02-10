@@ -25,6 +25,9 @@ class RelatedVideosQueryBuilderTest extends TestCase
         $this->relatedVideosQueryBuilder = new RelatedVideosQueryBuilder();
     }
 
+    /**
+     * @covers \MovingImage\Bundle\IqsBundle\QueryBuilder\Video\RelatedVideosQueryBuilder::__construct
+     */
     public function testConstructor(): void
     {
         self::assertInstanceOf(RelatedVideosQueryBuilder::class, $this->relatedVideosQueryBuilder);
@@ -33,6 +36,9 @@ class RelatedVideosQueryBuilderTest extends TestCase
         self::assertNotInstanceOf(MainQueryBuilderInterface::class, $this->relatedVideosQueryBuilder);
     }
 
+    /**
+     * @covers \MovingImage\Bundle\IqsBundle\QueryBuilder\Video\RelatedVideosQueryBuilder::testConfiguration
+     */
     public function testConfiguration(): void
     {
         $argumentsList = $this->getProperty($this->relatedVideosQueryBuilder, 'argumentsList', AbstractQueryBuilder::class);

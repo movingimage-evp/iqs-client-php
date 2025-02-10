@@ -18,6 +18,9 @@ class RelationQueryBuilderTest extends TestCase
 {
     use Helper;
 
+    /**
+     * @covers \MovingImage\Bundle\IqsBundle\QueryBuilder\Relation\RelationQueryBuilder::__construct
+     */
     public function testConstructor(): void
     {
         $queryBuilder = new RelationQueryBuilder(new RelatedVideosQueryBuilder(), [new RelationExpression('comparedField', false)]);
@@ -25,6 +28,9 @@ class RelationQueryBuilderTest extends TestCase
         self::assertNotInstanceOf(MainQueryBuilderInterface::class, $queryBuilder);
     }
 
+    /**
+     * @covers \MovingImage\Bundle\IqsBundle\QueryBuilder\Relation\RelationQueryBuilder::createRawObject
+     */
     public function testConfiguration(): void
     {
         $relatedVideosQueryBuilder = new RelatedVideosQueryBuilder();
@@ -76,6 +82,9 @@ class RelationQueryBuilderTest extends TestCase
         self::fail('no QueryBuilder in selectionSet');
     }
 
+    /**
+     * @covers \MovingImage\Bundle\IqsBundle\QueryBuilder\Relation\RelationQueryBuilder::testWrongArgumentForRelationExpressionsThrowsException
+     */
     public function testWrongArgumentForRelationExpressionsThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);

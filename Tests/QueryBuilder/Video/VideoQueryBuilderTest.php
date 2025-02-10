@@ -30,6 +30,9 @@ class VideoQueryBuilderTest extends TestCase
         $this->videoQueryBuilder = new VideoQueryBuilder($this->videoId, $this->videoManagerId);
     }
 
+    /**
+     * @covers \MovingImage\Bundle\IqsBundle\QueryBuilder\Video\VideoQueryBuilder::__construct
+     */
     public function testConstructor(): void
     {
         self::assertInstanceOf(VideoQueryBuilder::class, $this->videoQueryBuilder);
@@ -37,6 +40,9 @@ class VideoQueryBuilderTest extends TestCase
         self::assertInstanceOf(MainQueryBuilderInterface::class, $this->videoQueryBuilder);
     }
 
+    /**
+     * @covers \MovingImage\Bundle\IqsBundle\QueryBuilder\Video\VideoQueryBuilder::testConfiguration
+     */
     public function testQueryBuilderCorrectlyConfigured(): void
     {
         $argumentsList = $this->getProperty($this->videoQueryBuilder, 'argumentsList', AbstractQueryBuilder::class);
