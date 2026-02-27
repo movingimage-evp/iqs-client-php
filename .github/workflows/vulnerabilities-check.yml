@@ -20,6 +20,7 @@ jobs:
       - name: Run Snyk Security Scanner
         uses: movingimage-evp/github-actions/security/setup@main
         with:
+          github-packages-token: ${{ secrets.PACKAGES_MI_MAVEN_REPOSITORY_ACCESS_TOKEN }}
           snyk-token: ${{ secrets.SNYK_API_KEY }}
           code-severity-threshold: "medium"
           test-severity-threshold: "critical"
